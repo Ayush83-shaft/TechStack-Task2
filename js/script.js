@@ -207,19 +207,52 @@ faqItems.forEach(item => {
 // Contact Form
 // ===============================
 
-const form = document.querySelector(".contact-form");
+const contactForm = document.getElementById("contactForm");
 
-if(form){
+if (contactForm) {
 
-form.addEventListener("submit",(e)=>{
+    contactForm.addEventListener("submit", async (e) => {
 
-e.preventDefault();
+        e.preventDefault();
 
-alert("✅ Thank you! Your message has been sent successfully.");
+        const data = {
+            name: document.getElementById("name").value.trim(),
+            email: document.getElementById("email").value.trim(),
+            subject: document.getElementById("subject").value.trim(),
+            message: document.getElementById("message").value.trim()
+        };
 
-form.reset();
+        console.log("Sending Data:", data);
 
-});
+        try {
+
+            const response = await fetch("http://localhost:5000/api/contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+
+            const result = await response.json();
+
+            console.log("Server Response:", result);
+
+            if (response.ok) {
+                alert("✅ Message Sent Successfully!");
+                contactForm.reset();
+            } else {
+                alert(result.message || "Failed to send message.");
+            }
+
+        } catch (error) {
+
+            console.error(error);
+            alert("❌ Server Error");
+
+        }
+
+    });
 
 }
 // ===============================
@@ -293,3 +326,104 @@ revealElements.forEach(section=>{
 window.addEventListener("scroll",reveal);
 
 reveal();
+
+// ===============================
+// Dynamic Services
+// ===============================
+
+const servicesContainer = document.getElementById("servicesContainer");
+
+async function loadServices() {
+
+    if (!servicesContainer) {
+        return;
+    }
+
+    try {
+
+        const response = await fetch("http://localhost:5000/api/services");
+
+        const result = await response.json();
+
+        console.log("Services:", result);
+
+        if (!result.success) {
+            servicesContainer.innerHTML =
+                "<p>Unable to load services.</p>";
+            return;
+        }
+
+        if (result.data.length === 0) {
+            servicesContainer.innerHTML =
+                "<p>No services available.</p>";
+            return;
+        }
+
+        servicesContainer.innerHTML = "";
+
+        result.data.forEach(service => {
+
+            const card = document.createElement("div");
+
+            card.className = "service-card";
+
+            card.innerHTML = `
+                <i class="${service.icon}"></i>
+
+                <h3>${service.title}</h3>
+
+                <p>${service.description}</p>
+            `;
+
+            servicesContainer.appendChild(card);
+
+        });
+
+    } catch (error) {
+
+        console.error("Services Error:", error);
+
+        servicesContainer.innerHTML =
+            "<p>Unable to connect to server.</p>";
+
+    }
+}
+
+loadServices();
+// ===============================
+// Choose Pricing Plan
+// ===============================
+
+// ===============================
+// Choose Pricing Plan
+// ===============================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    const planButtons = document.querySelectorAll(".choose-plan");
+
+    planButtons.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            const selectedPlan = button.dataset.plan;
+
+            const subjectInput = document.getElementById("subject");
+
+            if (subjectInput) {
+                subjectInput.value = `Interested in ${selectedPlan}`;
+            }
+
+            const contactSection = document.getElementById("contact");
+
+            if (contactSection) {
+                contactSection.scrollIntoView({
+                    behavior: "smooth"
+                });
+            }
+
+        });
+
+    });
+
+});

@@ -134,7 +134,7 @@
 
         <div class="hero-right">
 
-            <img src="images/hero.png"
+            <img src="images/hero.svg"
                 alt="Startup Illustration">
 
         </div>
@@ -159,76 +159,8 @@
 
     <div class="services-grid">
 
-        <div class="service-card">
-
-            <i class="fa-solid fa-code"></i>
-
-            <h3>Web Development</h3>
-
-            <p>
-                Responsive and modern websites built with the latest technologies.
-            </p>
-
-        </div>
-
-        <div class="service-card">
-
-            <i class="fa-solid fa-mobile-screen-button"></i>
-
-            <h3>App Development</h3>
-
-            <p>
-                Android and iOS applications designed for performance.
-            </p>
-
-        </div>
-
-        <div class="service-card">
-
-            <i class="fa-solid fa-cloud"></i>
-
-            <h3>Cloud Solutions</h3>
-
-            <p>
-                Secure cloud deployment and scalable infrastructure.
-            </p>
-
-        </div>
-
-        <div class="service-card">
-
-            <i class="fa-solid fa-shield-halved"></i>
-
-            <h3>Cyber Security</h3>
-
-            <p>
-                Protect your business with enterprise-grade security.
-            </p>
-
-        </div>
-
-        <div class="service-card">
-
-            <i class="fa-solid fa-chart-line"></i>
-
-            <h3>SEO Marketing</h3>
-
-            <p>
-                Improve rankings and attract more customers organically.
-            </p>
-
-        </div>
-
-        <div class="service-card">
-
-            <i class="fa-solid fa-headset"></i>
-
-            <h3>24/7 Support</h3>
-
-            <p>
-                Dedicated technical support whenever you need assistance.
-            </p>
-
+        <div class="services-grid" id="servicesContainer">
+    <!-- Services will be loaded from MongoDB -->
         </div>
 
     </div>
@@ -242,7 +174,7 @@
 
         <div class="about-image">
 
-            <img src="images/about.png" alt="About">
+            <img src="images/about.svg" alt="About">
 
         </div>
 
@@ -380,7 +312,10 @@
 
             </ul>
 
-            <a href="#" class="btn-primary">Choose Plan</a>
+            <a href="#contact" class="btn-primary choose-plan" data-plan="Basic Plan">
+                    Choose Plan
+            </a>
+            
 
         </div>
 
@@ -408,7 +343,9 @@
 
             </ul>
 
-            <a href="#" class="btn-primary">Choose Plan</a>
+            <a href="#contact" class="btn-primary choose-plan" data-plan="Professional Plan">
+                    Choose Plan
+            </a>
 
         </div>
 
@@ -434,7 +371,9 @@
 
             </ul>
 
-            <a href="#" class="btn-primary">Choose Plan</a>
+            <a href="#contact" class="btn-primary choose-plan" data-plan="Enterprise Plan">
+                Choose Plan
+            </a>
 
         </div>
 
@@ -624,7 +563,6 @@
 
     </div>
 
-</section>
 <!-- ================= CONTACT ================= -->
 
 <section id="contact">
@@ -691,37 +629,41 @@
 
         <!-- Right Side -->
 
-        <form class="contact-form">
+        <form class="contact-form" id="contactForm">
 
-            <input
-                type="text"
-                placeholder="Full Name"
-                required>
+    <input
+        type="text"
+        id="name"
+        placeholder="Full Name"
+        required>
 
-            <input
-                type="email"
-                placeholder="Email Address"
-                required>
+    <input
+        type="email"
+        id="email"
+        placeholder="Email Address"
+        required>
 
-            <input
-                type="text"
-                placeholder="Subject"
-                required>
+    <input
+        type="text"
+        id="subject"
+        placeholder="Subject"
+        required>
 
-            <textarea
-                rows="6"
-                placeholder="Write your message..."
-                required></textarea>
+    <textarea
+        id="message"
+        rows="6"
+        placeholder="Write your message..."
+        required></textarea>
 
-            <button
-                type="submit"
-                class="btn-primary">
+    <button
+        type="submit"
+        class="btn-primary">
 
-                Send Message
+        Send Message
 
-            </button>
+    </button>
 
-        </form>
+</form>
 
     </div>
 
